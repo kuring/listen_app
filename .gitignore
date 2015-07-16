@@ -1,0 +1,7 @@
+*.d
+listen_app
+*.o
+log/
+.project
+.cproject
+listen_app.ini

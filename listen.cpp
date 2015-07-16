@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <dirent.h>
 #include <stdio.h>
+#include <signal.h>
 
 #include "listen.h"
 #include "public_func.h"
@@ -28,6 +29,9 @@ void Listen::run_app(std::string app)
 	if (pid == 0)
 	{
 		// child process
+		if (app.find("/") != std::string::npos) {
+			chdir(app.substr(0, app.find_last_of("/")).c_str());
+		}
 		WriteLog(ll_info, "child process %s running", app.c_str());
 		execl("/bin/sh", "sh", "-c", app.c_str(), NULL);
 		WriteLog(ll_info, "child process %s exit, errno = %d %m", app.c_str(), errno);

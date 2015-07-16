@@ -10,6 +10,7 @@
 #include <string.h>
 #include <iconv.h>
 #include <string>
+#include <unistd.h>
 
 static volatile LOG_LEVEL s_log_level=ll_sys;
 
@@ -24,13 +25,12 @@ void WriteLog(LOG_LEVEL log_level,const char *fm,...)
 	//if(log_level>s_log_level)
 	//	return;
 
-	mkdir("/data/log", 0755)
-	mkdir("/data/log/listen_app", 0755);
+	mkdir("log", 0755);
 
 	time(&ut);
 	localtime_r(&ut,&lt);
 
-	sprintf(FileName,"/data/log/listen_app/listen_app_%04u%02u%02u.log",lt.tm_year+1900,lt.tm_mon+1,lt.tm_mday);
+	sprintf(FileName,"log/listen_app_%04u%02u%02u.log",lt.tm_year+1900,lt.tm_mon+1,lt.tm_mday);
 	fp=fopen(FileName,"a");
 	if(fp==NULL)
 		return;

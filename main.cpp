@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 	listen.killall();
 	
 	printf("progress change to daemon, pid=%d\n", getpid());
-	daemon(0, 0);
+	daemon(1, 1);
 	listen.start();
 	
 	return 1;
